@@ -5,6 +5,9 @@ Add custom form fields to Magento 2 checkout. The form will appear in first chec
 
 Form data will be set in `quota` table through independent API request: `/V1/carts/mine/set-order-custom-fields`. Form is available only for logged in customers. After order is placed all data are set in `sales_order` table. Data are still in form after page refreshed, till cart is active.
 
+## Compatibility
+- Magento 2.1.x - 2.2.x
+
 ### Sample custom form fields
 - buyer
 - buyer email address
@@ -53,3 +56,6 @@ Check official documentation: http://devdocs.magento.com/guides/v2.0/howdoi/chec
 ## Uninstall
 To remove this module run `php bin/magento module:uninstall Bodak_CheckoutCustomForm`.
 It will remove all data and drop columns in `sales_order` and `quote` tables.
+
+## License
+[MIT License](LICENSE)
