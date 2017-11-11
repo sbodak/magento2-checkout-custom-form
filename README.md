@@ -45,7 +45,7 @@ Check official documentation: http://devdocs.magento.com/guides/v2.0/howdoi/chec
 
 
 ## Installation details
-1. Run `composer require "sbodak/magento2-checkout-custom-form":"^1.0.0"`
+1. Run `composer require "sbodak/magento2-checkout-custom-form":"^1.0.*"`
 2. Run `php bin/magento module:enable Bodak_CheckoutCustomForm`
 3. Run `php bin/magento setup:upgrade`
 4. Run `php bin/magento setup:di:compile`
