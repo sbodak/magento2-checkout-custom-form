@@ -5,7 +5,7 @@
     "MIT"
   ],
   "type": "magento2-module",
-  "keywords": ["magento2, checkout modification"],
+  "keywords": ["magento2", "custom checkout"],
   "version": "1.0.0",
   "authors": [
     {
