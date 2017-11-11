@@ -1,0 +1,32 @@
+<?php
+/** @var Bodak\CheckoutCustomForm\Block\Order\CustomFields $block */
+
+/** @var Bodak\CheckoutCustomForm\Model\Data\CustomFields $customFields */
+$customFields = $block->getCustomFields($block->getOrder());
+?>
+<?php if($customFields): ?>
+    <div class="block block-order-details-view">
+        <div class="block-content">
+            <div class="box">
+                <strong class="box-title"><span><?php /* @escapeNotVerified */ echo __('Other information') ?></span></strong>
+                <div class="box-content">
+                    <strong><?php /* @escapeNotVerified */ echo __('Buyer') ?>:</strong>
+                    <?php echo $this->escapeHtml($customFields->getCheckoutBuyerName()); ?><br>
+                    <strong><?php /* @escapeNotVerified */ echo __('Buyer email address') ?>:</strong>
+                    <?php echo $this->escapeHtml($customFields->getCheckoutBuyerEmail()); ?><br>
+                    <strong><?php /* @escapeNotVerified */ echo __('Purchase order no.') ?>:</strong>
+                    <?php echo $this->escapeHtml($customFields->getCheckoutPurchaseOrderNo()); ?><br>
+                    <strong><?php /* @escapeNotVerified */ echo __('Goods mark') ?>:</strong>
+                    <?php echo $this->escapeHtml($customFields->getCheckoutGoodsMark()); ?>
+                </div>
+            </div>
+
+            <div class="box">
+                <strong class="box-title"><span><?php /* @escapeNotVerified */ echo __('Comment') ?></span></strong>
+                <div class="box-content">
+                    <?php echo nl2br($this->escapeHtml($customFields->getCheckoutComment())); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
