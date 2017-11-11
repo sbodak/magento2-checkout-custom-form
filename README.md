@@ -43,11 +43,12 @@ Check official documentation: http://devdocs.magento.com/guides/v2.0/howdoi/chec
 ### Admin panel - Order Edit
 ![Admin panel - order edit](docs/backend_order_custom_information.png)
 
- 
+
 ## Installation details
-1. Run `composer require "sbodak/magento2-checkout-custom-form":"~1.0.0"`
+1. Run `composer require "sbodak/magento2-checkout-custom-form":"^1.0.0"`
 2. Run `php bin/magento module:enable Bodak_CheckoutCustomForm`
 3. Run `php bin/magento setup:upgrade`
+4. Run `php bin/magento setup:di:compile`
 
 ## Uninstall
 To remove this module run `php bin/magento module:uninstall Bodak_CheckoutCustomForm`.
