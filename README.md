@@ -5,8 +5,15 @@ Add custom form fields to Magento 2 checkout. The form will appear in first chec
 
 Form data will be set in `quota` table through independent API request: `/V1/carts/mine/set-order-custom-fields`. Form is available only for logged in customers. After order is placed all data are set in `sales_order` table. Data are still in form after page refreshed, till cart is active.
 
+
 ## Compatibility
 - Magento 2.1.x - 2.2.x
+
+
+## Installation details
+1. Run `composer require sbodak/magento2-b2b-disable-customer-registration`
+2. Run `php bin/magento module:enable Bodak_CheckoutCustomForm`
+3. Run `php bin/magento setup:upgrade`
 
 ### Sample custom form fields
 - buyer
@@ -46,12 +53,6 @@ Check official documentation: http://devdocs.magento.com/guides/v2.0/howdoi/chec
 ### Admin panel - Order Edit
 ![Admin panel - order edit](docs/backend_order_custom_information.png)
 
-
-## Installation details
-1. Run `composer require "sbodak/magento2-checkout-custom-form":"^1.0.*"`
-2. Run `php bin/magento module:enable Bodak_CheckoutCustomForm`
-3. Run `php bin/magento setup:upgrade`
-4. Run `php bin/magento setup:di:compile`
 
 ## Uninstall
 To remove this module run `php bin/magento module:uninstall Bodak_CheckoutCustomForm`.
