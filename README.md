@@ -11,7 +11,7 @@ Form data will be set in `quota` table through independent API request: `/V1/car
 
 
 ## Installation details
-1. Run `composer require sbodak/magento2-b2b-disable-customer-registration`
+1. Run `composer require sbodak/magento2-checkout-custom-form`
 2. Run `php bin/magento module:enable Bodak_CheckoutCustomForm`
 3. Run `php bin/magento setup:upgrade`
 
