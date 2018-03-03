@@ -60,13 +60,13 @@ class CustomFieldsRepository implements CustomFieldsRepositoryInterface
         CustomFieldsInterface $customFields
     ) {
         $this->cartRepository = $cartRepository;
-        $this->scopeConfig = $scopeConfig;
-        $this->customFields = $customFields;
+        $this->scopeConfig    = $scopeConfig;
+        $this->customFields   = $customFields;
     }
     /**
      * Save checkout custom fields
      *
-     * @param int                   $cartId       Cart id
+     * @param int                                                      $cartId       Cart id
      * @param \Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface $customFields Custom fields
      *
      * @return \Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface

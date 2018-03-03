@@ -9,4 +9,10 @@
             <parameter name="cartId" force="true">%cart_id%</parameter>
         </data>
     </route>
+    <route url="/V1/guest-carts/:cartId/set-order-custom-field" method="PUT">
+        <service class="Bodak\CheckoutCustomForm\Api\CustomFieldsGuestRepositoryInterface" method="saveCustomFields"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
 </routes>

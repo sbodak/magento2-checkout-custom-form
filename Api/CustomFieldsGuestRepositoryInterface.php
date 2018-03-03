@@ -1,6 +1,6 @@
 <?php
 /**
- * Checkout custom fields repository interface
+ * Checkout custom fields guest repository interface
  *
  * @package   Bodak\CheckoutCustomForm
  * @author    Slawomir Bodak <slawek.bodak@gmail.com>
@@ -16,32 +16,23 @@ use Magento\Sales\Model\Order;
 use Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface;
 
 /**
- * Interface CustomFieldsRepositoryInterface
+ * Interface CustomFieldsGuestRepositoryInterface
  *
  * @category Api/Interface
  * @package  Bodak\CheckoutCustomForm\Api
  */
-interface CustomFieldsRepositoryInterface
+interface CustomFieldsGuestRepositoryInterface
 {
     /**
      * Save checkout custom fields
      *
-     * @param int                                                      $cartId       Cart id
+     * @param string                                                   $cartId       Guest Cart id
      * @param \Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface $customFields Custom fields
      *
      * @return \Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface
      */
     public function saveCustomFields(
-        int $cartId,
+        string $cartId,
         CustomFieldsInterface $customFields
     ): CustomFieldsInterface;
-
-    /**
-     * Get checkoug custom fields
-     *
-     * @param Order $order Order
-     *
-     * @return CustomFieldsInterface
-     */
-    public function getCustomFields(Order $order) : CustomFieldsInterface;
 }

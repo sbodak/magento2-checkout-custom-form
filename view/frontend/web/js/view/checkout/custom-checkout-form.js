@@ -54,8 +54,16 @@ define([
 
             if (!this.source.get('params.invalid')) {
                 var formData = this.source.get('customCheckoutForm');
-                var url = urlBuilder.createUrl('/carts/mine/set-order-custom-fields', {});
                 var quoteId = quote.getQuoteId();
+                var isCustomer = customer.isLoggedIn();
+                var url;
+
+                if (isCustomer) {
+                    url = urlBuilder.createUrl('/carts/mine/set-order-custom-fields', {});
+                } else {
+                    url = urlBuilder.createUrl('/guest-carts/:cartId/set-order-custom-field', {cartId: quoteId});
+                }
+
                 var payload = {
                     cartId: quoteId,
                     customFields: formData
