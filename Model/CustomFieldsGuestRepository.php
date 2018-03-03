@@ -10,13 +10,9 @@ declare(strict_types=1);
 
 namespace Bodak\CheckoutCustomForm\Model;
 
-use Magento\Quote\Api\CartRepositoryInterface;
-use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Sales\Model\Order;
 use Magento\Quote\Model\QuoteIdMaskFactory;
 use Bodak\CheckoutCustomForm\Api\CustomFieldsGuestRepositoryInterface;
+use Bodak\CheckoutCustomForm\Api\CustomFieldsRepositoryInterface;
 use Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface;
 
 /**
@@ -58,8 +54,7 @@ class CustomFieldsGuestRepository implements CustomFieldsGuestRepositoryInterfac
         string $cartId,
         CustomFieldsInterface $customFields
     ): CustomFieldsInterface {
-        $quoteIdMaskFactory = $this->quoteIdMaskFactory->create();
-        $quoteIdMask = $quoteIdMaskFactory->getCollection()->addFieldToFilter( 'masked_id', $cartId); // or just $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
-        return $this->customFieldsRepository->saveCustomFields($quoteIdMask->getQuoteId(), $customFields);
+        $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
+        return $this->customFieldsRepository->saveCustomFields((int)$quoteIdMask->getQuoteId(), $customFields);
     }
 }
