@@ -12,6 +12,8 @@ Form data will be set in a `quota` table through independent API request:
 ## Compatibility
 - Magento 2.1.x - 2.2.x
 
+## Requirements
+- PHP 7.0 or higher
 
 ## Installation details
 1. Run `composer require sbodak/magento2-checkout-custom-form`
