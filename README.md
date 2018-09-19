@@ -29,9 +29,11 @@ Form data will be set in a `quota` table through independent API request:
 
 ### Modify form fields
 - You need to modify service contract data interface in `Api/Data/CustomFieldsInterfaces.php`
-- Yoy need to modify table schema in `Setup/InstallData.php`
+- You need to modify table schema in `Setup/InstallData.php`
 - You need to add new fields to observer `Observer/AddCustomFieldsToOrder.php` which save data in quota and sales table
 - You need to add new item in `view/frontend/layout/checkout_index_index.xml`
+- You need to modify the methods in `Model/Data/CustomFields.php`
+- You need to modify the methods in `Model/CustomFieldsRepository.php`
 
 ```
 <item name="custom-checkout-form-fieldset" xsi:type="array">
