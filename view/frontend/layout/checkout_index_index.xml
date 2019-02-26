@@ -25,76 +25,7 @@
                                                                         <item name="custom-checkout-form-fieldset" xsi:type="array">
                                                                             <item name="component" xsi:type="string">uiComponent</item>
                                                                             <item name="displayArea" xsi:type="string">custom-checkout-form-fields</item>
-                                                                            <item name="children" xsi:type="array">
-                                                                                <item name="checkout_buyer_name" xsi:type="array">
-                                                                                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
-                                                                                    <item name="config" xsi:type="array">
-                                                                                        <item name="customScope" xsi:type="string">customCheckoutForm</item>
-                                                                                        <item name="template" xsi:type="string">ui/form/field</item>
-                                                                                        <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
-                                                                                    </item>
-                                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                                                    <item name="dataScope" xsi:type="string">customCheckoutForm.checkout_buyer_name</item>
-                                                                                    <item name="label" xsi:type="string">Buyer name</item>
-                                                                                    <item name="sortOrder" xsi:type="string">1</item>
-                                                                                </item>
-                                                                                <item name="checkout_buyer_email" xsi:type="array">
-                                                                                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
-                                                                                    <item name="config" xsi:type="array">
-                                                                                        <item name="customScope" xsi:type="string">customCheckoutForm</item>
-                                                                                        <item name="template" xsi:type="string">ui/form/field</item>
-                                                                                        <item name="elementTmpl" xsi:type="string">ui/form/element/email</item>
-                                                                                        <item name="tooltip" xsi:type="array">
-                                                                                            <item name="description" xsi:type="string" translate="true">We will send an order confirmation to this email address</item>
-                                                                                        </item>
-                                                                                    </item>
-                                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                                                    <item name="dataScope" xsi:type="string">customCheckoutForm.checkout_buyer_email</item>
-                                                                                    <item name="label" xsi:type="string">Buyer email</item>
-                                                                                    <item name="sortOrder" xsi:type="string">2</item>
-                                                                                    <item name="validation" xsi:type="array">
-                                                                                        <item name="validate-email" xsi:type="boolean">true</item>
-                                                                                    </item>
-                                                                                </item>
-                                                                                <item name="checkout_purchase_order_no" xsi:type="array">
-                                                                                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
-                                                                                    <item name="config" xsi:type="array">
-                                                                                        <item name="customScope" xsi:type="string">customCheckoutForm</item>
-                                                                                        <item name="template" xsi:type="string">ui/form/field</item>
-                                                                                        <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
-                                                                                    </item>
-                                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                                                    <item name="dataScope" xsi:type="string">customCheckoutForm.checkout_purchase_order_no</item>
-                                                                                    <item name="label" xsi:type="string">Purchase order no.</item>
-                                                                                    <item name="sortOrder" xsi:type="string">3</item>
-                                                                                </item>
-                                                                                <item name="checkout_goods_mark" xsi:type="array">
-                                                                                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
-                                                                                    <item name="config" xsi:type="array">
-                                                                                        <item name="customScope" xsi:type="string">customCheckoutForm</item>
-                                                                                        <item name="template" xsi:type="string">ui/form/field</item>
-                                                                                        <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
-                                                                                    </item>
-                                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                                                    <item name="dataScope" xsi:type="string">customCheckoutForm.checkout_goods_mark</item>
-                                                                                    <item name="label" xsi:type="string">Goods mark</item>
-                                                                                    <item name="sortOrder" xsi:type="string">4</item>
-                                                                                </item>
-                                                                                <item name="checkout_comment" xsi:type="array">
-                                                                                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
-                                                                                    <item name="config" xsi:type="array">
-                                                                                        <item name="customScope" xsi:type="string">customCheckoutForm</item>
-                                                                                        <item name="template" xsi:type="string">ui/form/field</item>
-                                                                                        <item name="elementTmpl" xsi:type="string">ui/form/element/textarea</item>
-                                                                                        <item name="cols" xsi:type="string">15</item>
-                                                                                        <item name="rows" xsi:type="string">2</item>
-                                                                                    </item>
-                                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                                                    <item name="dataScope" xsi:type="string">customCheckoutForm.checkout_comment</item>
-                                                                                    <item name="label" xsi:type="string">Comment</item>
-                                                                                    <item name="sortOrder" xsi:type="string">5</item>
-                                                                                </item>
-                                                                            </item>
+                                                                            <item name="children" xsi:type="array"></item>
                                                                         </item>
                                                                     </item>
                                                                 </item>

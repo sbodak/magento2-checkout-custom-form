@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="sales" translate="label" sortOrder="10">
+            <label>Sales</label>
+        </tab>
+        <section id="checkout" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Checkout</label>
+            <tab>sales</tab>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Checkout Custom Form Configuration</label>
+                <field id="enable" translate="label" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled Form Fields</label>
+                    <source_model>Bodak\CheckoutCustomForm\Model\Config\Source\Option</source_model>
+                    <config_path>bodak/checkout/enabled_fields</config_path>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

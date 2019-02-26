@@ -3,4 +3,7 @@
     <preference for="Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface" type="Bodak\CheckoutCustomForm\Model\Data\CustomFields" />
     <preference for="Bodak\CheckoutCustomForm\Api\CustomFieldsRepositoryInterface" type="Bodak\CheckoutCustomForm\Model\CustomFieldsRepository" />
     <preference for="Bodak\CheckoutCustomForm\Api\CustomFieldsGuestRepositoryInterface" type="Bodak\CheckoutCustomForm\Model\CustomFieldsGuestRepository" />
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="extra_fields_layout" type="Bodak\CheckoutCustomForm\Model\Checkout\LayoutProcessor\Plugin" sortOrder="100"/>
+    </type>
 </config>
