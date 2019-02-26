@@ -5,6 +5,8 @@ Add a custom form fields to Magento 2 checkout. The form will appear in the firs
 The form is available for logged in customers and guests. After an order is placed all data are set in `sales_order` table.
 Data are still in form after page refreshed, till cart is active.
 
+It is also possible to enable/disable certain fields per store view in the admin backend.
+
 Form data will be set in a `quota` table through independent API request:
 - `/V1/carts/mine/set-order-custom-fields` (for logged in customer)
 - `/V1/guest-carts/:cartId/set-order-custom-field`  (for guest)
