@@ -45,7 +45,8 @@ class Plugin
             'label' => 'Comment',
             'config' => [
                 'cols' => 15,
-                'rows' => 2
+                'rows' => 2,
+                'elementTmpl' => 'ui/form/element/textarea',
             ]
         ],
     ];
