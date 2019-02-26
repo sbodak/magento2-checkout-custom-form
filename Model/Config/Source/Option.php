@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * @package   Bodak\CheckoutCustomForm
+ * @author    Konrad Langenberg <k.langenberg@imi.de>
+ * @copyright © 2017 Slawomir Bodak
+ * @license   See LICENSE file for license details.
+ */
+
+declare(strict_types=1);
+
 namespace Bodak\CheckoutCustomForm\Model\Config\Source;
 
 use \Magento\Framework\Option\ArrayInterface;

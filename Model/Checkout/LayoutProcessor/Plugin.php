@@ -2,7 +2,7 @@
 
 /**
  * @package   Bodak\CheckoutCustomForm
- * @author    Slawomir Bodak <slawek.bodak@gmail.com>
+ * @author    Konrad Langenberg <k.langenberg@imi.de>
  * @copyright © 2017 Slawomir Bodak
  * @license   See LICENSE file for license details.
  */
