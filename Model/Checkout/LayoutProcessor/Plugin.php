@@ -95,7 +95,7 @@ class Plugin
                 ],
                 'provider' => 'checkoutProvider',
                 'dataScope' => 'customCheckoutForm.' . $field['dataScopeName'],
-                'label' => $field['label'],
+                'label' => __($field['label']),
                 'sortOrder' => $sortOrder + 1,
                 'validation' => [],
             ];
