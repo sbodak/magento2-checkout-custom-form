@@ -109,7 +109,7 @@ class Plugin
             }
 
             $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
-                ['children']['shippingAddress']['children']['shipping-additional']['children']['custom-checkout-form-container']
+                ['children']['shippingAddress']['children']['before-form']['children']['custom-checkout-form-container']
                 ['children']['custom-checkout-form-fieldset']['children'][$field['dataScopeName']] = $formField;
         }
 
