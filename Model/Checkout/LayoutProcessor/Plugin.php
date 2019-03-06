@@ -47,7 +47,8 @@ class Plugin
                 'cols' => 15,
                 'rows' => 2,
                 'elementTmpl' => 'ui/form/element/textarea',
-            ]
+            ],
+            'showTitle' => false,
         ],
     ];
 
@@ -85,6 +86,7 @@ class Plugin
             if ( ! in_array($field['dataScopeName'], $config)) {
                 continue;
             }
+            if(!isset($field['showTitle'])) $field['showTitle'] = true;
 
             $formField = [
                 'component' => 'Magento_Ui/js/form/element/abstract',
@@ -95,7 +97,7 @@ class Plugin
                 ],
                 'provider' => 'checkoutProvider',
                 'dataScope' => 'customCheckoutForm.' . $field['dataScopeName'],
-                'label' => __($field['label']),
+                'label' => $field['showTitle'] ? __($field['label']) : '',
                 'sortOrder' => $sortOrder + 1,
                 'validation' => [],
             ];
