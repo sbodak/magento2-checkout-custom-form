@@ -105,4 +105,48 @@ interface CustomFieldsInterface
      * @return CustomFieldsInterface
      */
     public function setCheckoutComment(string $comment = null);
+
+    /**
+     * Checks if a field is enabled
+     *
+     * @param string $fieldName
+     *
+     * @return bool
+     */
+    public function isFieldEnabled(string $fieldName): bool;
+
+    /**
+     * Checks if buyer name field is enabled
+     *
+     * @return bool
+     */
+    public function isCheckoutBuyerNameEnabled(): bool;
+
+    /**
+     * Checks if buyer name field is enabled
+     *
+     * @return bool
+     */
+    public function isCheckoutBuyerEmailEnabled(): bool;
+
+    /**
+     * Checks if purchase order field is enabled
+     *
+     * @return bool
+     */
+    public function isCheckoutPurchaseOrderNoEnabled(): bool;
+
+    /**
+     * Checks if goods mark field is enabled
+     *
+     * @return bool
+     */
+    public function isCheckoutGoodsMarkEnabled(): bool;
+
+    /**
+     * Checks if comment field is enabled
+     *
+     * @return bool
+     */
+    public function isCheckoutCommentEnabled(): bool;
 }

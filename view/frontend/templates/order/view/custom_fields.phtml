@@ -10,21 +10,30 @@ $customFields = $block->getCustomFields($block->getOrder());
             <div class="box">
                 <strong class="box-title"><span><?php /* @escapeNotVerified */ echo __('Other information') ?></span></strong>
                 <div class="box-content">
-                    <strong><?php /* @escapeNotVerified */ echo __('Buyer') ?>:</strong>
-                    <?php echo $this->escapeHtml($customFields->getCheckoutBuyerName()); ?><br>
-                    <strong><?php /* @escapeNotVerified */ echo __('Buyer email address') ?>:</strong>
-                    <?php echo $this->escapeHtml($customFields->getCheckoutBuyerEmail()); ?><br>
-                    <strong><?php /* @escapeNotVerified */ echo __('Purchase order no.') ?>:</strong>
-                    <?php echo $this->escapeHtml($customFields->getCheckoutPurchaseOrderNo()); ?><br>
-                    <strong><?php /* @escapeNotVerified */ echo __('Goods mark') ?>:</strong>
-                    <?php echo $this->escapeHtml($customFields->getCheckoutGoodsMark()); ?>
-                </div>
-            </div>
-
-            <div class="box">
-                <strong class="box-title"><span><?php /* @escapeNotVerified */ echo __('Comment') ?></span></strong>
-                <div class="box-content">
-                    <?php echo nl2br($this->escapeHtml($customFields->getCheckoutComment())); ?>
+                    <?php if($customFields->isCheckoutBuyerNameEnabled()): ?>
+                        <strong><?php /* @escapeNotVerified */ echo __('Buyer') ?>:</strong>
+                        <?php echo $this->escapeHtml($customFields->getCheckoutBuyerName()); ?><br>
+                    <?php endif ?>
+                    <?php if($customFields->isCheckoutBuyerEmailEnabled()): ?>
+                        <strong><?php /* @escapeNotVerified */ echo __('Buyer email address') ?>:</strong>
+                        <?php echo $this->escapeHtml($customFields->getCheckoutBuyerEmail()); ?><br>
+                    <?php endif ?>
+                    <?php if($customFields->isCheckoutPurchaseOrderNoEnabled()): ?>
+                        <strong><?php /* @escapeNotVerified */ echo __('Purchase order no.') ?>:</strong>
+                        <?php echo $this->escapeHtml($customFields->getCheckoutPurchaseOrderNo()); ?><br>
+                    <?php endif ?>
+                    <?php if($customFields->isCheckoutGoodsMarkEnabled()): ?>
+                        <strong><?php /* @escapeNotVerified */ echo __('Goods mark') ?>:</strong>
+                        <?php echo $this->escapeHtml($customFields->getCheckoutGoodsMark()); ?>
+                    <?php endif ?>
+                    <?php if($customFields->isCheckoutCommentEnabled()): ?>
+                    <div class="box">
+                        <strong class="box-title"><span><?php /* @escapeNotVerified */ echo __('Comment') ?></span></strong>
+                        <div class="box-content">
+                            <?php echo nl2br($this->escapeHtml($customFields->getCheckoutComment())); ?>
+                        </div>
+                    </div>
+                    <?php endif ?>
                 </div>
             </div>
         </div>

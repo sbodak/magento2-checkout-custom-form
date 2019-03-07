@@ -21,6 +21,27 @@ use Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface;
  */
 class CustomFields extends AbstractExtensibleObject implements CustomFieldsInterface
 {
+
+    /**
+     * @var null|array
+     */
+    private $enabledFields = null;
+
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $_scopeConfig;
+
+    /**
+     * AddCustomFieldsToOrder constructor.
+     *
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     */
+    public function __construct(\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig)
+    {
+        $this->_scopeConfig = $scopeConfig;
+    }
+
     /**
      * Get checkout buyer name
      *
@@ -130,4 +151,60 @@ class CustomFields extends AbstractExtensibleObject implements CustomFieldsInter
     {
         return $this->setData(self::CHECKOUT_COMMENT, $comment);
     }
+
+    /**
+     * @param string $fieldName
+     *
+     * @return bool
+     */
+    public function isFieldEnabled(string $fieldName): bool
+    {
+        if($this->enabledFields === null) {
+            $this->enabledFields = explode(',', $this->_scopeConfig->getValue('bodak/checkout/enabled_fields', \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
+        }
+
+        return in_array($fieldName, $this->enabledFields);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCheckoutBuyerNameEnabled(): bool
+    {
+        return $this->isFieldEnabled(self::CHECKOUT_BUYER_NAME);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCheckoutBuyerEmailEnabled(): bool
+    {
+        return $this->isFieldEnabled(self::CHECKOUT_BUYER_EMAIL);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCheckoutPurchaseOrderNoEnabled(): bool
+    {
+        return $this->isFieldEnabled(self::CHECKOUT_PURCHASE_ORDER_NO);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCheckoutGoodsMarkEnabled(): bool
+    {
+        return $this->isFieldEnabled(self::CHECKOUT_GOODS_MARK);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCheckoutCommentEnabled(): bool
+    {
+        return $this->isFieldEnabled(self::CHECKOUT_COMMENT);
+    }
+
+
 }
