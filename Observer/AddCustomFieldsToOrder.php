@@ -49,7 +49,7 @@ class AddCustomFieldsToOrder implements ObserverInterface
     ) {
         $order = $observer->getEvent()->getOrder();
         $quote = $observer->getEvent()->getQuote();
-        $config = explode(',', $this->_scopeConfig->getValue('bodak/checkout/enabled_fields', Magento\Store\Model\ScopeInterface::SCOPE_STORE));
+        $config = explode(',', $this->_scopeConfig->getValue('bodak/checkout/enabled_fields', \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
 
         if (in_array(CustomFieldsInterface::CHECKOUT_BUYER_NAME, $config)) {
             $order->setData(
