@@ -13,21 +13,18 @@
                                             <item name="children" xsi:type="array">
                                                 <item name="shippingAddress" xsi:type="array">
                                                     <item name="children" xsi:type="array">
-                                                        <item name="before-form" xsi:type="array">
+                                                        <item name="custom-checkout-form-container" xsi:type="array">
+                                                            <item name="displayArea" xsi:type="string">shippingAdditional</item>
+                                                            <item name="component" xsi:type="string">Bodak_CheckoutCustomForm/js/view/checkout/custom-checkout-form</item>
+                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="template" xsi:type="string">Bodak_CheckoutCustomForm/checkout/custom-checkout-form</item>
+                                                            </item>
                                                             <item name="children" xsi:type="array">
-                                                                <item name="custom-checkout-form-container" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Bodak_CheckoutCustomForm/js/view/checkout/custom-checkout-form</item>
-                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                                    <item name="config" xsi:type="array">
-                                                                        <item name="template" xsi:type="string">Bodak_CheckoutCustomForm/checkout/custom-checkout-form</item>
-                                                                    </item>
-                                                                    <item name="children" xsi:type="array">
-                                                                        <item name="custom-checkout-form-fieldset" xsi:type="array">
-                                                                            <item name="component" xsi:type="string">uiComponent</item>
-                                                                            <item name="displayArea" xsi:type="string">custom-checkout-form-fields</item>
-                                                                            <item name="children" xsi:type="array"></item>
-                                                                        </item>
-                                                                    </item>
+                                                                <item name="custom-checkout-form-fieldset" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                                    <item name="children" xsi:type="array"></item>
+                                                                    <item name="displayArea" xsi:type="string">custom-checkout-form-fields</item>
                                                                 </item>
                                                             </item>
                                                         </item>
