@@ -13,9 +13,12 @@
                                             <item name="children" xsi:type="array">
                                                 <item name="shippingAddress" xsi:type="array">
                                                     <item name="children" xsi:type="array">
-                                                        <item name="before-form" xsi:type="array">
+                                                        <item name="custom-checkout-form" xsi:type="array">
+                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                            <item name="displayArea" xsi:type="string">custom-checkout-form</item>
                                                             <item name="children" xsi:type="array">
                                                                 <item name="custom-checkout-form-container" xsi:type="array">
+                                                                    <item name="sortOrder" xsi:type="string">0</item>
                                                                     <item name="component" xsi:type="string">Bodak_CheckoutCustomForm/js/view/checkout/custom-checkout-form</item>
                                                                     <item name="provider" xsi:type="string">checkoutProvider</item>
                                                                     <item name="config" xsi:type="array">
@@ -62,6 +65,9 @@
                                                                                         <item name="customScope" xsi:type="string">customCheckoutForm</item>
                                                                                         <item name="template" xsi:type="string">ui/form/field</item>
                                                                                         <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
+                                                                                    </item>
+                                                                                    <item name="validation" xsi:type="array">
+                                                                                        <item name="required-entry" xsi:type="boolean">true</item>
                                                                                     </item>
                                                                                     <item name="provider" xsi:type="string">checkoutProvider</item>
                                                                                     <item name="dataScope" xsi:type="string">customCheckoutForm.checkout_purchase_order_no</item>
