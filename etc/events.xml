@@ -3,4 +3,7 @@
     <event name="sales_model_service_quote_submit_before">
         <observer name="Bodak_checkout_custom_fields_add_to_order" instance="Bodak\CheckoutCustomForm\Observer\AddCustomFieldsToOrder" />
     </event>
+    <event name="sales_order_load_after">
+        <observer name="Bodak_checkout_custom_form_order_load_after" instance="Bodak\CheckoutCustomForm\Observer\Sales\OrderLoadAfter" />
+    </event>
 </config>
