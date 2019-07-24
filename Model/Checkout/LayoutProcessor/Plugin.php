@@ -46,7 +46,8 @@ class Plugin
             'config' => [
                 'cols' => 15,
                 'rows' => 2,
-                'elementTmpl' => 'ui/form/element/textarea',
+                'maxlength' => 80,
+                'elementTmpl' => 'Bodak_CheckoutCustomForm/form/element/textarea',
             ],
             'showTitle' => false,
         ],
