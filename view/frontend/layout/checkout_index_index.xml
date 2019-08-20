@@ -100,6 +100,21 @@
                                                                                     <item name="label" xsi:type="string">Comment</item>
                                                                                     <item name="sortOrder" xsi:type="string">5</item>
                                                                                 </item>
+
+                                                                                <item name="checkout_custom_select_field" xsi:type="array">
+                                                                                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/select</item>
+                                                                                    <item name="config" xsi:type="array">
+                                                                                        <item name="customScope" xsi:type="string">customCheckoutForm</item>
+                                                                                        <item name="template" xsi:type="string">ui/form/field</item>
+                                                                                        <item name="elementTmpl" xsi:type="string">ui/form/element/select</item>
+                                                                                    </item>
+                                                                                    <item name="options" xsi:type="array" />
+                                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                                    <item name="dataScope" xsi:type="string">customCheckoutForm.checkout_custom_select_field</item>
+                                                                                    <item name="label" xsi:type="string" translate="true">Select Field</item>
+                                                                                    <item name="sortOrder" xsi:type="string">2</item>
+                                                                                </item>
+
                                                                             </item>
                                                                         </item>
                                                                     </item>
