@@ -12,9 +12,18 @@ declare(strict_types=1);
 namespace Bodak\CheckoutCustomForm\Model\Checkout\LayoutProcessor;
 
 use Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface;
+use Bodak\CheckoutCustomForm\Helper\Config;
 
 class Plugin
 {
+    /**
+     * @var Config
+     */
+    private $config;
+
+    /**
+     * @var array
+     */
     private $fields = [
         [
             'dataScopeName' => CustomFieldsInterface::CHECKOUT_BUYER_NAME,
@@ -28,8 +37,8 @@ class Plugin
             ],
             'config' => [
                 'tooltip' => [
-                    'description' => 'We will send an order confirmation to this email address'
-                ]
+                    'description' => 'We will send an order confirmation to this email address',
+                ],
             ],
         ],
         [
@@ -46,7 +55,7 @@ class Plugin
             'config' => [
                 'cols' => 15,
                 'rows' => 2,
-                'maxlength' => 80,
+                'maxlength' => null,
                 'elementTmpl' => 'Bodak_CheckoutCustomForm/form/element/textarea',
             ],
             'showTitle' => false,
@@ -54,40 +63,37 @@ class Plugin
     ];
 
     /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected $_scopeConfig;
-
-    /**
      * LayoutProcessor constructor.
      *
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     * @param Config $config
      */
-    public function __construct(\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig)
+    public function __construct(Config $config)
     {
-        $this->_scopeConfig = $scopeConfig;
+        $this->config = $config;
     }
 
     /**
      * @param \Magento\Checkout\Block\Checkout\LayoutProcessor $subject
      * @param array $jsLayout
      *
-     * @see \Magento\Checkout\Block\Checkout\LayoutProcessor::process
      * @return array
+     * @see \Magento\Checkout\Block\Checkout\LayoutProcessor::process
      */
     public function afterProcess(
         \Magento\Checkout\Block\Checkout\LayoutProcessor $subject,
         array $jsLayout
     ) {
-        $config = explode(',',
-            $this->_scopeConfig->getValue('bodak/checkout/enabled_fields',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE));
+        $config = $this->config->getEnabledFields();
+
+        $this->applyLengthLimitToFields();
 
         foreach ($this->fields as $sortOrder => $field) {
-            if ( ! in_array($field['dataScopeName'], $config)) {
+            if (!in_array($field['dataScopeName'], $config)) {
                 continue;
             }
-            if(!isset($field['showTitle'])) $field['showTitle'] = true;
+            if (!isset($field['showTitle'])) {
+                $field['showTitle'] = true;
+            }
 
             $formField = [
                 'component' => 'Magento_Ui/js/form/element/abstract',
@@ -112,10 +118,23 @@ class Plugin
             }
 
             $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
-                ['children']['shippingAddress']['children']['custom-checkout-form-container']
-                ['children']['custom-checkout-form-fieldset']['children'][$field['dataScopeName']] = $formField;
+            ['children']['shippingAddress']['children']['custom-checkout-form-container']
+            ['children']['custom-checkout-form-fieldset']['children'][$field['dataScopeName']] = $formField;
         }
 
         return $jsLayout;
+    }
+
+    private function applyLengthLimitToFields()
+    {
+        foreach ($this->fields as $key => $field) {
+            $fieldName = $field['dataScopeName'];
+            $allowedLength = $this->config->getAllowedLength($fieldName);
+            if ($allowedLength === Config::LIMIT_NOT_SET) {
+                continue;
+            }
+            $this->fields[$key]['config']['maxlength'] = $allowedLength;
+            $this->fields[$key]['validation']['max_text_length'] = $allowedLength;
+        }
     }
 }
