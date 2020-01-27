@@ -6,6 +6,7 @@ use Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface;
 use Bodak\CheckoutCustomForm\Helper\Config;
 use Magento\Framework\Validator\AbstractValidator;
 use Zend_Validate_Exception;
+use Zend\Filter\Word\UnderscoreToCamelCase;
 
 
 class Validator extends AbstractValidator
@@ -22,13 +23,20 @@ class Validator extends AbstractValidator
     private $config;
 
     /**
+     * @var UnderscoreToCamelCase
+     */
+    private $underscoreToCamelCase;
+
+    /**
      * Validator constructor.
      *
      * @param Config $config
+     * @param UnderscoreToCamelCase $underscoreToCamelCase
      */
-    public function __construct(Config $config)
+    public function __construct(Config $config, UnderscoreToCamelCase $underscoreToCamelCase)
     {
         $this->config = $config;
+        $this->underscoreToCamelCase = $underscoreToCamelCase;
     }
 
     /**
@@ -96,6 +104,6 @@ class Validator extends AbstractValidator
      */
     private function convertSnakeToCamelCase($string)
     {
-        return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', strtolower($string)))));
+        return $this->underscoreToCamelCase->filter($string);
     }
 }
