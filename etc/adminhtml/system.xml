@@ -15,6 +15,26 @@
                     <source_model>Bodak\CheckoutCustomForm\Model\Config\Source\Option</source_model>
                     <config_path>bodak/checkout/enabled_fields</config_path>
                 </field>
+                <field id="checkout_buyer_name_limit" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Buyer Name Limit</label>
+                    <comment>Limit the character length. Leave empty for no limit.</comment>
+                </field>
+                <field id="checkout_buyer_email_limit" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Buyer email Limit</label>
+                    <comment>Limit the character length. Leave empty for no limit.</comment>
+                </field>
+                <field id="checkout_purchase_order_no_limit" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Purchase order no. Limit</label>
+                    <comment>Limit the character length. Leave empty for no limit.</comment>
+                </field>
+                <field id="checkout_goods_mark_limit" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Goods mark Limit</label>
+                    <comment>Limit the character length. Leave empty for no limit.</comment>
+                </field>
+                <field id="checkout_comment_limit" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Comment Limit</label>
+                    <comment>Limit the character length. Leave empty for no limit.</comment>
+                </field>
             </group>
         </section>
     </system>

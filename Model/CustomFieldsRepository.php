@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Bodak\CheckoutCustomForm\Model;
 
+use Bodak\CheckoutCustomForm\Model\CustomFields\Validator;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -48,30 +50,41 @@ class CustomFieldsRepository implements CustomFieldsRepositoryInterface
     protected $customFields;
 
     /**
+     * @var Validator
+     */
+    private $validator;
+
+    /**
      * CustomFieldsRepository constructor.
      *
      * @param CartRepositoryInterface $cartRepository CartRepositoryInterface
-     * @param ScopeConfigInterface    $scopeConfig    ScopeConfigInterface
-     * @param CustomFieldsInterface   $customFields   CustomFieldsInterface
+     * @param ScopeConfigInterface $scopeConfig ScopeConfigInterface
+     * @param CustomFieldsInterface $customFields CustomFieldsInterface
+     * @param Validator $validator
      */
     public function __construct(
         CartRepositoryInterface $cartRepository,
         ScopeConfigInterface $scopeConfig,
-        CustomFieldsInterface $customFields
+        CustomFieldsInterface $customFields,
+        Validator $validator
     ) {
         $this->cartRepository = $cartRepository;
         $this->scopeConfig    = $scopeConfig;
         $this->customFields   = $customFields;
+        $this->validator = $validator;
     }
+
     /**
      * Save checkout custom fields
      *
-     * @param int                                                      $cartId       Cart id
+     * @param int $cartId Cart id
      * @param \Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface $customFields Custom fields
      *
-     * @return \Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface
+     * @return \Bodak\CheckoutCustomForm\Api\Data\CustomFieldsInterface|string
      * @throws CouldNotSaveException
      * @throws NoSuchEntityException
+     * @throws \Zend_Validate_Exception
+     * @throws LocalizedException
      */
     public function saveCustomFields(
         int $cartId,
@@ -80,6 +93,10 @@ class CustomFieldsRepository implements CustomFieldsRepositoryInterface
         $cart = $this->cartRepository->getActive($cartId);
         if (!$cart->getItemsCount()) {
             throw new NoSuchEntityException(__('Cart %1 is empty', $cartId));
+        }
+
+        if (!$this->validator->isValid($customFields)) {
+            throw new LocalizedException(__('Custom fields contain invalid values.'));
         }
 
         try {

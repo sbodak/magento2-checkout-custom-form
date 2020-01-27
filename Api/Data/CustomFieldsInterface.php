@@ -26,6 +26,14 @@ interface CustomFieldsInterface
     const CHECKOUT_GOODS_MARK = 'checkout_goods_mark';
     const CHECKOUT_COMMENT = 'checkout_comment';
 
+    const ATTRIBUTES = [
+        self::CHECKOUT_BUYER_EMAIL,
+        self::CHECKOUT_BUYER_NAME,
+        self::CHECKOUT_COMMENT,
+        self::CHECKOUT_GOODS_MARK,
+        self::CHECKOUT_PURCHASE_ORDER_NO,
+    ];
+
     /**
      * Get checkout buyer name
      *
