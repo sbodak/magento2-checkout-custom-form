@@ -91,19 +91,9 @@ class Validator extends AbstractValidator
             return true;
         }
 
-        $function = $this->convertSnakeToCamelCase('get_' . $attribute);
+        $function = $this->underscoreToCamelCase->filter('get_' . $attribute);
         $value = call_user_func([$this->value, $function]);
 
         return mb_strlen($value) <= $allowedLength;
-    }
-
-    /**
-     * @param $string
-     *
-     * @return string
-     */
-    private function convertSnakeToCamelCase($string)
-    {
-        return $this->underscoreToCamelCase->filter($string);
     }
 }
