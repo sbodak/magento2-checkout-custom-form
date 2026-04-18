@@ -1,0 +1,41 @@
+<?php
+/** @var Bodak\CheckoutCustomForm\Block\Order\CustomFields $block */
+/** @var Bodak\CheckoutCustomForm\Model\Data\CustomFields $customFields */
+$customFields = $block->getCustomFields($block->getOrder());
+?>
+<?php if ($customFields): ?>
+    <div class="block block-order-details-view">
+        <div class="block-content">
+            <div class="box">
+                <strong class="box-title"><span><?= $block->escapeHtml(__('Other information')) ?></span></strong>
+                <div class="box-content">
+                    <?php if ($customFields->isCheckoutBuyerNameEnabled()): ?>
+                        <strong><?= $block->escapeHtml(__('Buyer')) ?>:</strong>
+                        <?= $block->escapeHtml($customFields->getCheckoutBuyerName()) ?><br>
+                    <?php endif ?>
+                    <?php if ($customFields->isCheckoutBuyerEmailEnabled()): ?>
+                        <strong><?= $block->escapeHtml(__('Buyer email address')) ?>:</strong>
+                        <?= $block->escapeHtml($customFields->getCheckoutBuyerEmail()) ?><br>
+                    <?php endif ?>
+                    <?php if ($customFields->isCheckoutPurchaseOrderNoEnabled()): ?>
+                        <strong><?= $block->escapeHtml(__('Purchase order no.')) ?>:</strong>
+                        <?= $block->escapeHtml($customFields->getCheckoutPurchaseOrderNo()) ?><br>
+                    <?php endif ?>
+                    <?php if ($customFields->isCheckoutGoodsMarkEnabled()): ?>
+                        <strong><?= $block->escapeHtml(__('Goods mark')) ?>:</strong>
+                        <?= $block->escapeHtml($customFields->getCheckoutGoodsMark()) ?>
+                    <?php endif ?>
+                </div>
+            </div>
+            <?php if ($customFields->isCheckoutCommentEnabled()): ?>
+                <div class="box">
+                    <strong class="box-title"><span><?= $block->escapeHtml(__('Comment')) ?></span></strong>
+                    <div class="box-content">
+                        <?= nl2br($block->escapeHtml($customFields->getCheckoutComment())) ?>
+                    </div>
+                </div>
+            <?php endif ?>
+        </div>
+    </div>
+<?php endif ?>
+

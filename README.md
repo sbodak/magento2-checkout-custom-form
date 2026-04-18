@@ -1,96 +1,136 @@
-# Magento 2 - Checkout custom form
- 
-## Overview
-Add a custom form fields to the Magento 2 checkout. The form will appear in the first checkout step (shipping step) above shipping methods.
-The form is available for logged in customers and guests. After an order is placed all data are set in `sales_order` table.
-Data are still in the form after page refreshed, till cart is active.
+# Magento 2 – Checkout Custom Form
 
-Form data will be set in a `quota` table through independent API request:
-- `/V1/carts/mine/set-order-custom-fields` (for logged in customer)
-- `/V1/guest-carts/:cartId/set-order-custom-field`  (for guest)
+## Overview
+
+Adds a configurable custom form to the Magento 2 checkout (shipping step), placed above the shipping-method selection.  
+The form works for both logged-in customers and guests.  
+After an order is placed, all entered data is stored in the `sales_order` table and exposed via extension attributes on `OrderInterface`.  
+Form data persists through page refreshes as long as the cart is active.
+
+Fields can be individually **enabled or disabled per store view** from the admin panel.  
+Optional **character-length limits** can be configured for each field.
+
+### Default form fields
+
+| Field | Config key |
+|---|---|
+| Buyer name | `checkout_buyer_name` |
+| Buyer email | `checkout_buyer_email` |
+| Purchase order no. | `checkout_purchase_order_no` |
+| Goods mark | `checkout_goods_mark` |
+| Comment | `checkout_comment` |
+
+### API endpoints
+
+| Method | Endpoint | Auth |
+|--------|----------|------|
+| `PUT` | `/V1/carts/mine/set-order-custom-fields` | Customer |
+| `PUT` | `/V1/guest-carts/:cartId/set-order-custom-field` | Guest |
+
+---
 
 ## Compatibility
-- Tag 1.2.* => Magento 2.3
-- Tag 1.1.* => Magento 2.1.x - 2.2.x (no longer supported)
 
-## Requirements
-- PHP 7.0 or higher
+| Module version | Magento | PHP |
+|---|---|---|
+| `2.0.*` | 2.4.6 – 2.4.8 | 8.1 · 8.2 · 8.3 · 8.4 |
+| `1.2.*` | 2.3.x | 7.x |
+| `1.1.*` | 2.1.x – 2.2.x | *(no longer supported)* |
 
-## Installation details
-1. Run `composer require sbodak/magento2-checkout-custom-form`
-2. Run `php bin/magento module:enable Bodak_CheckoutCustomForm`
-3. Run `php bin/magento setup:upgrade`
+---
 
-### Sample custom form fields
-- buyer
-- buyer email address
-- purchase order no.
-- goods mark
-- comments
+## Installation
 
-### Modify form fields
-- You need to modify service contract data interface in `Api/Data/CustomFieldsInterfaces.php`
-- You need to modify table schema in `Setup/InstallData.php`
-- You need to add new fields to observer `Observer/AddCustomFieldsToOrder.php` which save data in quota and sales table
-- You need to add new item in `view/frontend/layout/checkout_index_index.xml`
-- You need to modify the methods in `Model/Data/CustomFields.php`
-- You need to modify the methods in `Model/CustomFieldsRepository.php`
-
-```
-<item name="custom-checkout-form-fieldset" xsi:type="array">
-    <item name="component" xsi:type="string">uiComponent</item>
-    <item name="displayArea" xsi:type="string">custom-checkout-form-fields</item>
-    <item name="children" xsi:type="array">
-        [... place here new definition of your field]
-    </item>
-</item>
+```bash
+composer require sbodak/magento2-checkout-custom-form
+php bin/magento module:enable Bodak_CheckoutCustomForm
+php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+php bin/magento cache:flush
 ```
 
-Check official documentation: https://devdocs.magento.com/guides/v2.3/howdoi/checkout/checkout_form.html
+---
 
-- You need to modify template views in `view/frontend/templates/order/view/custom_fields.phtml` (for customer account) 
-and `view/adminhtml/templates/order/view/custom_fields.phtml (for admin panel)`.
-- Checkout form view is generated automatically using Ui Components
+## Admin Configuration
 
-### Required entry
-If you want to make field required, check this example:
+Go to **Stores → Configuration → Sales → Checkout → Checkout Custom Form Configuration**.
+
+- **Enabled Form Fields** – multiselect; choose which fields appear in the checkout.
+- **\*\* Character Limit** fields – optionally restrict the maximum length of each field (leave empty for no limit).
+
+---
+
+## Customisation
+
+### Adding / removing fields
+
+1. Add the constant to `Api/Data/CustomFieldsInterface.php` and the `ATTRIBUTES` array.
+2. Add the column to `Setup/Patch/Data/AddCustomFields.php`.
+3. Extend `Model/Data/CustomFields.php` with getters, setters, and `isXxxEnabled()`.
+4. Register the field in `Model/Config/Source/Option.php`.
+5. Add it to `Model/Checkout/LayoutProcessor/Plugin.php` (`$fields` array).
+6. Update `Observer/AddCustomFieldsToOrder.php` if custom mapping is required.
+7. Update `Observer/Sales/OrderLoadAfter.php` to populate the extension attribute.
+8. Update templates in `view/adminhtml/templates/order/view/custom_fields.phtml`
+   and `view/frontend/templates/order/view/custom_fields.phtml`.
+
+### Making a field required
+
+In `Model/Checkout/LayoutProcessor/Plugin.php`, add a `validation` key to the field array:
+
+```php
+[
+    'dataScopeName' => CustomFieldsInterface::CHECKOUT_PURCHASE_ORDER_NO,
+    'label'         => 'Purchase order no.',
+    'validation'    => ['required-entry' => true],
+],
 ```
-<item name="checkout_purchase_order_no" xsi:type="array">
-    <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
-    <item name="config" xsi:type="array">
-        <item name="customScope" xsi:type="string">customCheckoutForm</item>
-        <item name="template" xsi:type="string">ui/form/field</item>
-        <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
-    </item>
-    <item name="validation" xsi:type="array">
-        <item name="required-entry" xsi:type="boolean">true</item>
-    </item>
-    <item name="provider" xsi:type="string">checkoutProvider</item>
-    <item name="dataScope" xsi:type="string">customCheckoutForm.checkout_purchase_order_no</item>
-    <item name="label" xsi:type="string">Purchase order no.</item>
-    <item name="sortOrder" xsi:type="string">3</item>
-</item>
+
+### Overriding translations
+
+Edit `i18n/en_US.csv` (or create a language-specific CSV, e.g. `de_DE.csv`).
+
+---
+
+## Screenshots
+
+### Checkout – Guest
+![Checkout frontend custom form – Guest](docs/frontened_checkout_custom_form_guest.png)
+
+### Checkout – Logged in
+![Checkout frontend custom form – Logged in](docs/frontened_checkout_custom_form_logged.png)
+
+### Customer account – Order history
+![Customer account – Order history view](docs/frontend_customer_account_orders.png)
+
+### Admin panel – Order edit
+![Admin panel – order edit](docs/backend_order_custom_information.png)
+
+---
+
+## Running Tests
+
+```bash
+composer install
+vendor/bin/phpunit
 ```
 
-### Fast fields override 
-You can modify `i18n/en_US.csv` translation to change field names.
-
-### Checkout view - custom form - Guest
-![Checkout frontend custom form - Guest](docs/frontened_checkout_custom_form_guest.png)
-
-### Checkout view - custom form - Logged in
-![Checkout frontend custom form - Logged in](docs/frontened_checkout_custom_form_logged.png)
-
-### Custom account - Order history view
-![Customer account - Order history view](docs/frontend_customer_account_orders.png)
-
-### Admin panel - Order Edit
-![Admin panel - order edit](docs/backend_order_custom_information.png)
-
+---
 
 ## Uninstall
-To remove this module run `php bin/magento module:uninstall Bodak_CheckoutCustomForm`.
-It will remove all data and drop columns in `sales_order` and `quote` tables.
+
+```bash
+php bin/magento module:uninstall Bodak_CheckoutCustomForm
+```
+
+This drops the custom columns from the `sales_order` and `quote` tables.
+
+---
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
+
 [MIT License](LICENSE)

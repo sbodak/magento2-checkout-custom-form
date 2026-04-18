@@ -1,12 +1,12 @@
 {
   "name": "sbodak/magento2-checkout-custom-form",
-  "description": "Add a custom form to Magento 2 checkout on the first step.",
+  "description": "Add a custom form to Magento 2 checkout on the shipping step.",
   "license": [
     "MIT"
   ],
   "type": "magento2-module",
-  "keywords": ["magento2", "custom checkout"],
-  "version": "1.2.1",
+  "keywords": ["magento2", "custom checkout", "checkout form", "magento2-module"],
+  "version": "2.0.0",
   "authors": [
     {
       "name": "Slawomir Bodak",
@@ -14,14 +14,36 @@
     }
   ],
   "require": {
-    "php": "~7.0.0|~7.1.3|~7.2.0"
+    "php": "^8.1|^8.2|^8.3|^8.4",
+    "magento/framework": "^103.0",
+    "magento/module-checkout": "^100.4",
+    "magento/module-quote": "^101.2",
+    "magento/module-sales": "^103.0",
+    "magento/module-store": "^101.1",
+    "laminas/laminas-filter": "^2.25"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5|^11.0"
   },
   "autoload": {
     "files": [
-      "registration.php"
+      "src/registration.php"
     ],
     "psr-4": {
-      "Bodak\\CheckoutCustomForm\\": ""
+      "Bodak\\CheckoutCustomForm\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Bodak\\CheckoutCustomForm\\Test\\": "src/Test/"
+    }
+  },
+  "extra": {
+    "magento-compatibility": {
+      "2.4.6": "*",
+      "2.4.7": "*",
+      "2.4.8": "*"
     }
   }
 }
+

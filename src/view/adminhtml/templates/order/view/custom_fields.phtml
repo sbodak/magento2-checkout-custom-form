@@ -1,0 +1,59 @@
+<?php
+/** @var Magento\Backend\Block\Template $block */
+/** @var Bodak\CheckoutCustomForm\Model\Data\CustomFields $customFields */
+$customFields = $block->getOrderCustomFields();
+?>
+<?php if ($customFields): ?>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?= $block->escapeHtml(__('Other information')) ?></span>
+        </div>
+        <div class="admin__page-section-content">
+            <div class="order-information">
+                <?php if ($customFields->isCheckoutBuyerNameEnabled()): ?>
+                    <div class="box">
+                        <strong class="box-title"><span><?= $block->escapeHtml(__('Buyer')) ?></span></strong>
+                        <div class="box-content">
+                            <?= $block->escapeHtml($customFields->getCheckoutBuyerName()) ?>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <?php if ($customFields->isCheckoutBuyerEmailEnabled()): ?>
+                    <div class="box">
+                        <strong class="box-title"><span><?= $block->escapeHtml(__('Buyer email address')) ?></span></strong>
+                        <div class="box-content">
+                            <?= $block->escapeHtml($customFields->getCheckoutBuyerEmail()) ?>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <?php if ($customFields->isCheckoutPurchaseOrderNoEnabled()): ?>
+                    <div class="box">
+                        <strong class="box-title"><span><?= $block->escapeHtml(__('Purchase order no.')) ?></span></strong>
+                        <div class="box-content">
+                            <?= $block->escapeHtml($customFields->getCheckoutPurchaseOrderNo()) ?>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <?php if ($customFields->isCheckoutGoodsMarkEnabled()): ?>
+                    <div class="box">
+                        <strong class="box-title"><span><?= $block->escapeHtml(__('Goods mark')) ?></span></strong>
+                        <div class="box-content">
+                            <?= $block->escapeHtml($customFields->getCheckoutGoodsMark()) ?>
+                        </div>
+                    </div>
+                <?php endif ?>
+            </div>
+            <?php if ($customFields->isCheckoutCommentEnabled()): ?>
+                <div class="order-information">
+                    <div class="box">
+                        <strong class="box-title"><span><?= $block->escapeHtml(__('Comment')) ?></span></strong>
+                        <div class="box-content">
+                            <?= nl2br($block->escapeHtml($customFields->getCheckoutComment())) ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif ?>
+        </div>
+    </section>
+<?php endif ?>
+
